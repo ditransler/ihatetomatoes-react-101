@@ -14,7 +14,19 @@ class App extends React.Component {
         };
     }
 
+    componentWillMount() {
+        const contacts = localStorage.getItem('contacts');
+
+        contacts && this.setState({
+            contacts: JSON.parse(contacts),
+            isLoading: false
+        });
+    }
+
     componentDidMount() {
+        if (localStorage.getItem('contacts')) {
+            return;
+        }
         this.fetchData();
     }
 
@@ -35,6 +47,12 @@ class App extends React.Component {
         }))
         .catch((error) => console.log('parsing failed', error));
     }
+
+    componentWillUpdate(nextProps, nextState) {
+        localStorage.setItem('contacts', JSON.stringify(nextState.contacts));
+        localStorage.setItem('contactsDate', Date.now());
+    }
+    
 
     render() {
         const {isLoading, contacts} = this.state;
