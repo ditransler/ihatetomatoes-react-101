@@ -69,30 +69,30 @@ header {
 // }
 
 /* Simple CSS transition of max-height */
-.panel {
-    .panel-collapse {
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.5s cubic-bezier(.525,.66,.495,1.4);  
-    }
-    &.is-expanded {
-        .panel-collapse {
-            max-height: 200px;
-        }
-    }
-}
+// .panel {
+//     .panel-collapse {
+//         max-height: 0;
+//         overflow: hidden;
+//         transition: max-height 0.5s cubic-bezier(.525,.66,.495,1.4);  
+//     }
+//     &.is-expanded {
+//         .panel-collapse {
+//             max-height: 200px;
+//         }
+//     }
+// }
 
 /* JS calculated height - the most accurate */
-// .panel {
-//     .panel-heading {
-//         cursor: pointer;
-//     }
-//     .panel-collapse {
-//         overflow: hidden;
-//         transition: height 0.3s ease-out;  
-//     }
-//     .panel-body {
-//         border: none !important;
-//     }
-//     h2 {margin-top: 5px !important;}
-// }
+.panel {
+    .panel-heading {
+        cursor: pointer;
+    }
+    .panel-collapse {
+        overflow: hidden;
+        transition: height 0.3s ease-out;  
+    }
+    .panel-body {
+        border: none !important;
+    }
+    h2 {margin-top: 5px !important;}
+}
