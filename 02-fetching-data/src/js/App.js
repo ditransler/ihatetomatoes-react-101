@@ -19,7 +19,21 @@ class App extends React.Component {
     }
 
     fetchData() {
-
+        fetch('https://randomuser.me/api/?results=50&nat=us,dk,fr,gb')
+        .then((response) => response.json())
+        .then((data) => data.results.map((user) => (
+            {
+                name: `${user.name.first} ${user.name.last}`,
+                username: `${user.login.username}`,
+                email: `${user.email}`,
+                location: `${user.location.street}, ${user.location.city}`
+            }
+        )))
+        .then((contacts) => this.setState({
+            contacts,
+            isLoading: false
+        }))
+        .catch((error) => console.log('parsing failed', error));
     }
 
     render() {
@@ -35,9 +49,12 @@ class App extends React.Component {
                     <div className="panel-group">
                         {
                             !isLoading && contacts.length > 0 ? contacts.map((contact) => {
-                                <Collapsible title="Tracy Palmer">
-                                    <p>tracey.palmer@example.com<br />3280 manchester road, ely</p>
-                                </Collapsible>
+                                const {username, name, email, location} = contact;
+                                return (
+                                    <Collapsible key={username} title={name}>
+                                        <p>{email}<br />{location}</p>
+                                    </Collapsible>
+                                );
                             }) : null
                         }
                     </div>
