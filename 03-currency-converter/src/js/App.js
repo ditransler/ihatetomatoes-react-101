@@ -1,13 +1,30 @@
 import React from 'react';
-import image from '../images/cash-calculator.svg'
+import image from '../images/cash-calculator.svg';
+import data from './data/Data';
+import SelectCurrency from './components/SelectCurrency';
 
 class App extends React.Component {
 
   constructor(props){
     super(props);
 
+    this.onSelectCurrency = this.onSelectCurrency.bind(this);
+
+    this.state = {
+      currencies: data.currencies,
+      currencyA: data.currencies[0],
+      currencyB: data.currencies[1],
+      currencyAval: data.currencies[0].sellRate
+    }
   }
+
+  onSelectCurrency(code) {
+    console.log(`select ${code}`);
+  }
+
   render(){
+    const {currencies} = this.state;
+
     return (
       <div>
         <header>
@@ -22,10 +39,7 @@ class App extends React.Component {
                 {
                   //Select currency
                 }
-                <select>
-                  <option value="A">Option A</option>
-                  <option value="B">Option B</option>
-                </select>
+                <SelectCurrency currencies={currencies} onSelectCurrency={this.onSelectCurrency}/>
               </p>
             </div>
           </div>
